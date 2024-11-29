@@ -2,30 +2,33 @@ package com.bankManager.bankManager.DTO.Converter;
 
 
 import com.bankManager.bankManager.DTO.AccountDTO;
+import com.bankManager.bankManager.DTO.CustomerAccountDTO;
 import com.bankManager.bankManager.Model.Account;
+import com.bankManager.bankManager.Model.Customer;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;
 
 @Component
 public class AccountDTOConverter {
+        private final CustomerDTOConverter converter;
 
-    private final TransactionDTOConverter transactionDTOConverter;
-    private final CustomerDTOConverter customerDTOConverter;
-
-    public AccountDTOConverter(TransactionDTOConverter transactionDTOConverter, CustomerDTOConverter customerDTOConverter) {
-        this.transactionDTOConverter = transactionDTOConverter;
-        this.customerDTOConverter = customerDTOConverter;
+    public AccountDTOConverter(CustomerDTOConverter converter) {
+        this.converter = converter;
     }
 
     public AccountDTO convertToAccountDto(Account account){
-
         return new AccountDTO(account.getCreationDate(),
                 account.getAccountNumber(),
                 account.getBalance(),
-                account.getTransactions().stream()
-                        .map(transaction -> transactionDTOConverter.convertToTransactionDto(transaction)).collect(Collectors.toSet()),
-                customerDTOConverter.convertToCustomerDto(account.getCustomer()));
+                converter.convertToCustomerDto(account.getCustomer()));
+    }
+
+    public CustomerAccountDTO convertToCustumerAccountDto(Account account){
+        return new CustomerAccountDTO(account.getCreationDate(),
+                account.getAccountNumber(),
+                account.getBalance(),
+                converter.convertToCustomerDto(account.getCustomer()));
     }
 
 }

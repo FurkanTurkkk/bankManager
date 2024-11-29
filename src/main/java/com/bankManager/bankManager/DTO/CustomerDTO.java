@@ -20,6 +20,14 @@ public class CustomerDTO {
     public CustomerDTO() {
     }
 
+    public CustomerDTO(String name, String surName, String phoneNumber, String emailAddress, LocalDate birthDay) {
+        this.name = name;
+        this.surName = surName;
+        this.phoneNumber = phoneNumber;
+        this.emailAddress = emailAddress;
+        this.birthDay = birthDay;
+    }
+
     public CustomerDTO(String name, String surName, String phoneNumber, String emailAddress, LocalDate birthDay, Set<AccountDTO> accounts) {
         this.name = name;
         this.surName = surName;

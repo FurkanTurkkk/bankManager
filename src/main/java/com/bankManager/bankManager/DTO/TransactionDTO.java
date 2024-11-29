@@ -12,19 +12,13 @@ public class TransactionDTO {
     private TransactionType transactionType;
     private Long amount;
     private LocalDate transactionDate;
-    private Account account;
 
     public TransactionDTO() {
     }
 
-    public TransactionDTO(TransactionType transactionType,
-                          Long amount,
-                          LocalDate transactionDate,
-                          Account account) {
-
+    public TransactionDTO(TransactionType transactionType, Long amount, LocalDate transactionDate) {
         this.transactionType = transactionType;
         this.amount = amount;
         this.transactionDate = transactionDate;
-        this.account=account;
     }
 }
